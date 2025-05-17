@@ -1,6 +1,6 @@
-const emojis = ['🍓', '🌸', '🍩']; // 3 different emojis
-let cards = [...emojis, ...emojis, ...emojis]; // 3 of each → 9 cards
-cards = cards.sort(() => 0.5 - Math.random()); // shuffle
+const emojis = ['🍓', '🌸', '🍩']; // 3 emojis
+let cards = [...emojis, ...emojis, ...emojis]; // total 9
+cards = cards.sort(() => 0.5 - Math.random());
 
 const gameBoard = document.getElementById('gameBoard');
 const messageBox = document.getElementById('messageBox');
