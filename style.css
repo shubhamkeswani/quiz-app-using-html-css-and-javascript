@@ -1,13 +1,14 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  text-align: center;
   background-color: #fff7f2;
-  color: #ff6f91;
-  padding: 30px;
+  text-align: center;
+  padding: 20px;
+  color: #ff6699;
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 2rem;
+  margin-bottom: 30px;
 }
 
 .game-board {
@@ -15,39 +16,32 @@ h1 {
   grid-template-columns: repeat(3, 100px);
   grid-gap: 15px;
   justify-content: center;
-  margin-top: 30px;
 }
 
-.tile {
+.card {
   width: 100px;
   height: 100px;
-  background-color: #fff0f5;
-  border: 2px solid #ffb6c1;
   font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #d1fadf;
+  border: 2px solid #ffa3b1;
+  border-radius: 12px;
   cursor: pointer;
-  user-select: none;
-  border-radius: 10px;
-  transition: background-color 0.3s;
 }
 
-.tile.revealed {
-  background-color: #fff;
-}
-
-.tile.matched {
-  background-color: #c1f0c1;
+.card.matched {
+  background-color: #e0ffe0;
   pointer-events: none;
-}
-
-.hidden {
-  display: none;
 }
 
 #message {
   font-size: 1.5rem;
   margin-top: 30px;
   color: #28a745;
+}
+
+.hidden {
+  display: none;
 }
