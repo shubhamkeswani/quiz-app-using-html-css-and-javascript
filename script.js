@@ -1,56 +1,42 @@
-const emojis = ["🌸", "🌟", "🍓", "🌸", "🌟", "🍓", "🍩", "🍩", "🍒"];
-const gameBoard = document.getElementById("gameBoard");
+const emojis = ["🌟", "🍓", "🌸", "🍩", "🍒", "🌟", "🍓", "🌸", "🍩"];
+let shuffled = emojis.sort(() => 0.5 - Math.random());
+
+const board = document.getElementById("board");
 let selected = [];
 let matched = [];
 
-function shuffle(array) {
-  return array.sort(() => 0.5 - Math.random());
-}
+shuffled.forEach((emoji, index) => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.dataset.index = index;
+  board.appendChild(card);
 
-function createBoard() {
-  const shuffled = shuffle(emojis.slice());
-  shuffled.forEach((emoji, index) => {
-    const tile = document.createElement("div");
-    tile.classList.add("tile");
-    tile.dataset.emoji = emoji;
-    tile.dataset.index = index;
-    tile.innerText = "❓";
-    tile.addEventListener("click", handleClick);
-    gameBoard.appendChild(tile);
-  });
-}
+  card.addEventListener("click", () => {
+    if (selected.length < 2 && !selected.includes(card) && !card.classList.contains("matched")) {
+      card.textContent = emoji;
+      selected.push({ card, emoji });
 
-function handleClick(e) {
-  const tile = e.target;
-  const emoji = tile.dataset.emoji;
+      if (selected.length === 2) {
+        setTimeout(() => {
+          const [first, second] = selected;
+          if (first.emoji === second.emoji) {
+            first.card.classList.add("matched");
+            second.card.classList.add("matched");
+            matched.push(first.card, second.card);
+          } else {
+            first.card.textContent = "";
+            second.card.textContent = "";
+          }
 
-  if (selected.length === 2 || tile.classList.contains("revealed")) return;
+          selected = [];
 
-  tile.innerText = emoji;
-  tile.classList.add("revealed");
-  selected.push(tile);
+          // Show message if all matched
+          if (matched.length === emojis.length) {
+            document.getElementById("message").classList.remove("hidden");
+          }
 
-  if (selected.length === 2) {
-    const [first, second] = selected;
-    if (first.dataset.emoji === second.dataset.emoji) {
-      first.classList.add("matched");
-      second.classList.add("matched");
-      matched.push(first, second);
-      selected = [];
-
-      if (matched.length === emojis.length) {
-        document.getElementById("message").classList.remove("hidden");
+        }, 600);
       }
-    } else {
-      setTimeout(() => {
-        first.innerText = "❓";
-        second.innerText = "❓";
-        first.classList.remove("revealed");
-        second.classList.remove("revealed");
-        selected = [];
-      }, 1000);
     }
-  }
-}
-
-createBoard();
+  });
+});
