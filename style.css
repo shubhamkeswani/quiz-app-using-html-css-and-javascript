@@ -1,43 +1,53 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #fdf6f0;
+  font-family: 'Segoe UI', sans-serif;
   text-align: center;
-  padding-top: 50px;
+  background-color: #fff7f2;
+  color: #ff6f91;
+  padding: 30px;
 }
 
 h1 {
-  color: #f67c7c;
+  font-size: 2em;
 }
 
-.grid {
+.game-board {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  grid-gap: 10px;
+  grid-gap: 15px;
   justify-content: center;
-  margin: 20px auto;
+  margin-top: 30px;
 }
 
 .tile {
   width: 100px;
   height: 100px;
+  background-color: #fff0f5;
+  border: 2px solid #ffb6c1;
   font-size: 2rem;
-  background: #ffe0e0;
-  border: 2px solid #f6b6b6;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   user-select: none;
+  border-radius: 10px;
+  transition: background-color 0.3s;
 }
 
-.matched {
-  background-color: #c7f6c7;
-  cursor: default;
+.tile.revealed {
+  background-color: #fff;
+}
+
+.tile.matched {
+  background-color: #c1f0c1;
+  pointer-events: none;
+}
+
+.hidden {
+  display: none;
 }
 
 #message {
   font-size: 1.5rem;
-  margin-top: 20px;
-  color: #4caf50;
-  display: none;
+  margin-top: 30px;
+  color: #28a745;
 }
