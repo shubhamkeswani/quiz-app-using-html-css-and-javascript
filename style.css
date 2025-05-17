@@ -29,14 +29,16 @@ h1 {
   font-size: 40px;
   cursor: pointer;
   transition: transform 0.3s;
+  user-select: none;
 }
 
 .card.flipped {
   background-color: #ffffff;
 }
 
-.hidden {
-  display: none;
+.card.empty {
+  background-color: transparent;
+  cursor: default;
 }
 
 #messageBox {
