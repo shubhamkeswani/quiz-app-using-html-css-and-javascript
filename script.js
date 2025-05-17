@@ -1,9 +1,14 @@
-const emojis = ['🍓', '🌸', '🍩', '🌟', '🍒'];
+const emojis = ['🍓', '🌸', '🍩']; // 3 emojis → 6 cards (pairs)
 let cards = [...emojis, ...emojis];
+
+// Add 3 empty cards to fill 9 spots (3x3 grid)
+for (let i = 0; i < 3; i++) cards.push('empty');
+
 cards = cards.sort(() => 0.5 - Math.random());
 
-const memoryGame = document.querySelector('.memory-game');
+const gameBoard = document.getElementById('gameBoard');
 const messageBox = document.getElementById('messageBox');
+const restartBtn = document.getElementById('restartBtn');
 
 let firstCard = null;
 let secondCard = null;
@@ -13,7 +18,6 @@ let matchedPairs = 0;
 function showMessage(text, delay = 0) {
   setTimeout(() => {
     messageBox.textContent = text;
-    messageBox.classList.remove('hidden');
   }, delay);
 }
 
@@ -21,13 +25,20 @@ function createCard(emoji) {
   const card = document.createElement('div');
   card.classList.add('card');
   card.dataset.emoji = emoji;
-  card.innerHTML = '❓';
+
+  if (emoji === 'empty') {
+    card.classList.add('empty');
+    card.textContent = '';
+    return card;
+  }
+
+  card.textContent = '❓';
 
   card.addEventListener('click', () => {
-    if (lockBoard || card.classList.contains('flipped')) return;
+    if (lockBoard || card.classList.contains('flipped') || card === firstCard) return;
 
     card.classList.add('flipped');
-    card.innerHTML = emoji;
+    card.textContent = emoji;
 
     if (!firstCard) {
       firstCard = card;
@@ -43,14 +54,15 @@ function createCard(emoji) {
       if (matchedPairs === emojis.length) {
         setTimeout(() => {
           messageBox.textContent = '🎉 Waah Chandini Ji! You did it brilliantly! 💕';
+          restartBtn.style.display = 'inline-block';
         }, 500);
       }
     } else {
       setTimeout(() => {
         firstCard.classList.remove('flipped');
-        firstCard.innerHTML = '❓';
+        firstCard.textContent = '❓';
         secondCard.classList.remove('flipped');
-        secondCard.innerHTML = '❓';
+        secondCard.textContent = '❓';
         resetTurn();
       }, 1000);
     }
@@ -66,7 +78,24 @@ function resetTurn() {
 
 function startGame() {
   showMessage('Chandini Ji, get ready! 🧠 Let’s test your brain! 💗', 500);
-  cards.forEach(emoji => memoryGame.appendChild(createCard(emoji)));
+  cards.forEach(emoji => gameBoard.appendChild(createCard(emoji)));
+  restartBtn.style.display = 'none';
 }
+
+restartBtn.addEventListener('click', () => {
+  matchedPairs = 0;
+  firstCard = null;
+  secondCard = null;
+  lockBoard = false;
+  messageBox.textContent = 'Chandini Ji, get ready! 🧠 Let’s test your brain! 💗';
+  restartBtn.style.display = 'none';
+  gameBoard.innerHTML = '';
+
+  cards = [...emojis, ...emojis];
+  for (let i = 0; i < 3; i++) cards.push('empty');
+  cards = cards.sort(() => 0.5 - Math.random());
+
+  cards.forEach(emoji => gameBoard.appendChild(createCard(emoji)));
+});
 
 startGame();
