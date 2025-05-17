@@ -8,14 +8,12 @@ body, html {
   height: 100%;
   background-color: #fff7f2;
   font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
   text-align: center;
 }
 
@@ -36,6 +34,7 @@ h1 {
   grid-template-columns: repeat(3, 100px);
   grid-gap: 15px;
   justify-content: center;
+  margin: 0 auto;
 }
 
 .card {
