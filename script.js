@@ -1,7 +1,6 @@
-const emojis = ['🍓', '🌸', '🍩']; // 3 unique emojis
-let cards = [...emojis, ...emojis, ...emojis]; // 3 of each = 9 total
-
-cards = cards.sort(() => 0.5 - Math.random());
+const emojis = ['🍓', '🌸', '🍩']; // 3 different emojis
+let cards = [...emojis, ...emojis, ...emojis]; // 3 of each → 9 cards
+cards = cards.sort(() => 0.5 - Math.random()); // shuffle
 
 const gameBoard = document.getElementById('gameBoard');
 const messageBox = document.getElementById('messageBox');
@@ -22,7 +21,7 @@ function createCard(emoji) {
   card.textContent = '❓';
 
   card.addEventListener('click', () => {
-    if (card.classList.contains('flipped') || flippedCards.length >= 3) return;
+    if (card.classList.contains('flipped') || flippedCards.includes(card) || flippedCards.length === 3) return;
 
     card.classList.add('flipped');
     card.textContent = emoji;
@@ -35,7 +34,6 @@ function createCard(emoji) {
       if (allMatch) {
         matchedGroups++;
         flippedCards = [];
-
         if (matchedGroups === 3) {
           showMessage('💖 Get well soon Chandni Ji 💖', 500);
         }
@@ -55,7 +53,7 @@ function createCard(emoji) {
 }
 
 function startGame() {
-  showMessage('Loading game...');
+  showMessage('Chandini Ji, let’s test your brain! 🧠💗');
   cards.forEach(emoji => gameBoard.appendChild(createCard(emoji)));
 }
 
