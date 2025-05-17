@@ -1,13 +1,21 @@
-body {
+* {
+  box-sizing: border-box;
+}
+
+body, html {
   margin: 0;
   padding: 0;
+  height: 100%;
   background-color: #fff7f2;
   font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
+  height: 100%;
   text-align: center;
 }
 
@@ -27,6 +35,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, 100px);
   grid-gap: 15px;
+  justify-content: center;
 }
 
 .card {
