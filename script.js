@@ -30,7 +30,9 @@ function resetGame() {
   timer = 0;
   gameBoard.innerHTML = '';
   restartBtn.style.display = 'none';
-  showMessage('Ananya Ji, let’s have a memory test! ');
+  
+  // Updated starting message:
+  showMessage('Ananya Ji, let’s test your memory! 🧠💗');
   timerBox.textContent = '⏱ Time: 0s';
 
   clearInterval(timerInterval);
@@ -63,6 +65,7 @@ function createCard(emoji) {
 
         if (matchedGroups === 3) {
           clearInterval(timerInterval);
+          // Updated final message without extra emoji except the smiley you wanted:
           showMessage('Wow, you have such an amazing memory! Should I start preparing for your next memory test already? 😄', 500);
           winSound.play();
           restartBtn.style.display = 'inline-block';
