@@ -63,7 +63,7 @@ function createCard(emoji) {
 
         if (matchedGroups === 3) {
           clearInterval(timerInterval);
-          showMessage('💖 Woww! You are an example of beauty with brain 💖', 500);
+          showMessage('Woww! You are an example of beauty with brain', 500);
           winSound.play();
           restartBtn.style.display = 'inline-block';
         }
