@@ -1,4 +1,3 @@
-/* Reset default margins and paddings */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,62 +9,64 @@ html, body {
   width: 100%;
   background-color: #fff7f2;
   font-family: 'Segoe UI', sans-serif;
-}
-
-/* Center the container using Flexbox */
-body {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Container for all content */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
 }
 
-/* Heading styles */
 h1 {
   color: #ff5c8d;
   font-size: 2em;
   margin-bottom: 10px;
 }
 
-/* Message box styles */
-#messageBox {
+#messageBox, #timer {
   font-size: 1.2em;
   color: #444;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-/* Memory game grid */
 .memory-game {
   display: grid;
   grid-template-columns: repeat(3, 100px);
   gap: 15px;
   justify-content: center;
+  margin: 20px 0;
 }
 
-/* Card styles */
 .card {
   width: 100px;
   height: 100px;
-  background-color: #d1f4d9;
+  background-color: #fff;
+  border: 3px solid #d1f4d9;
   border-radius: 15px;
   font-size: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   user-select: none;
 }
 
-/* Flipped card styles */
 .card.flipped {
-  background-color: #ffffff;
+  background-color: #d1f4d9;
+}
+
+#restartBtn {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #ff5c8d;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
