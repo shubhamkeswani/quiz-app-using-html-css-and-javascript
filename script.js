@@ -1,17 +1,42 @@
-const emojis = ['🍓', '🌸', '🍩']; // 3 emojis
-let cards = [...emojis, ...emojis, ...emojis]; // total 9
-cards = cards.sort(() => 0.5 - Math.random());
+const emojis = ['🍓', '🌸', '🍩'];
+let cards = [];
+let flippedCards = [];
+let matchedGroups = 0;
+let timer = 0;
+let timerInterval;
 
 const gameBoard = document.getElementById('gameBoard');
 const messageBox = document.getElementById('messageBox');
-
-let flippedCards = [];
-let matchedGroups = 0;
+const timerBox = document.getElementById('timer');
+const restartBtn = document.getElementById('restartBtn');
+const matchSound = document.getElementById('matchSound');
+const winSound = document.getElementById('winSound');
 
 function showMessage(text, delay = 0) {
   setTimeout(() => {
     messageBox.textContent = text;
   }, delay);
+}
+
+function updateTimer() {
+  timer++;
+  timerBox.textContent = `⏱ Time: ${timer}s`;
+}
+
+function resetGame() {
+  cards = [...emojis, ...emojis, ...emojis].sort(() => 0.5 - Math.random());
+  flippedCards = [];
+  matchedGroups = 0;
+  timer = 0;
+  gameBoard.innerHTML = '';
+  restartBtn.style.display = 'none';
+  showMessage('Ananya Ji, let’s test your brain! 🧠💗');
+  timerBox.textContent = '⏱ Time: 0s';
+
+  clearInterval(timerInterval);
+  timerInterval = setInterval(updateTimer, 1000);
+
+  cards.forEach(emoji => gameBoard.appendChild(createCard(emoji)));
 }
 
 function createCard(emoji) {
@@ -34,8 +59,13 @@ function createCard(emoji) {
       if (allMatch) {
         matchedGroups++;
         flippedCards = [];
+        matchSound.play();
+
         if (matchedGroups === 3) {
-          showMessage('💖 Get well soon Chandni Ji 💖', 500);
+          clearInterval(timerInterval);
+          showMessage('💖 Woww! You are an example of beauty with brain 💖', 500);
+          winSound.play();
+          restartBtn.style.display = 'inline-block';
         }
       } else {
         setTimeout(() => {
@@ -52,9 +82,6 @@ function createCard(emoji) {
   return card;
 }
 
-function startGame() {
-  showMessage('Chandini Ji, let’s test your brain! 🧠💗');
-  cards.forEach(emoji => gameBoard.appendChild(createCard(emoji)));
-}
+restartBtn.addEventListener('click', resetGame);
 
-startGame();
+window.onload = resetGame;
