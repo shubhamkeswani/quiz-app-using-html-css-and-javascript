@@ -30,7 +30,7 @@ function resetGame() {
   timer = 0;
   gameBoard.innerHTML = '';
   restartBtn.style.display = 'none';
-  showMessage('Ananya Ji, let’s test your brain! 🧠💗');
+  showMessage('Ananya Ji, let’s have a memory test! ');
   timerBox.textContent = '⏱ Time: 0s';
 
   clearInterval(timerInterval);
@@ -63,7 +63,7 @@ function createCard(emoji) {
 
         if (matchedGroups === 3) {
           clearInterval(timerInterval);
-          showMessage('Woww! You are an example of beauty with brain', 500);
+          showMessage('Wow, you have such an amazing memory! Should I start preparing for your next memory test already? 😄', 500);
           winSound.play();
           restartBtn.style.display = 'inline-block';
         }
